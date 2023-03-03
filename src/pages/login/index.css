@@ -1,0 +1,552 @@
+.App{
+    width: 100%;
+    height: 100vh;
+  }
+
+.renderLoading {
+  width: 100%;
+  height: 100vh;
+  background-color: #cfcfcf;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.renderLoading.active {
+  visibility: visible;
+  opacity: 1;
+}
+.renderLoading.inactive {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.loader  {
+  animation: rotate 1s infinite;  
+  height: 50px;
+  width: 50px;
+}
+
+.loader:before,
+.loader:after {   
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 20px;  
+  width: 20px;
+}
+.loader:before {
+  animation: ball1 1s infinite;  
+  background-color: #cb2025;
+  box-shadow: 30px 0 0 #f8b334;
+  margin-bottom: 10px;
+}
+.loader:after {
+  animation: ball2 1s infinite; 
+  background-color: #00a096;
+  box-shadow: 30px 0 0 #97bf0d;
+}
+
+@keyframes rotate {
+  0% { 
+    -webkit-transform: rotate(0deg) scale(0.8); 
+    -moz-transform: rotate(0deg) scale(0.8);
+  }
+  50% { 
+    -webkit-transform: rotate(360deg) scale(1.2); 
+    -moz-transform: rotate(360deg) scale(1.2);
+  }
+  100% { 
+    -webkit-transform: rotate(720deg) scale(0.8); 
+    -moz-transform: rotate(720deg) scale(0.8);
+  }
+}
+
+@keyframes ball1 {
+  0% {
+    box-shadow: 30px 0 0 #f8b334;
+  }
+  50% {
+    box-shadow: 0 0 0 #f8b334;
+    margin-bottom: 0;
+    -webkit-transform: translate(15px,15px);
+    -moz-transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #f8b334;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes ball2 {
+  0% {
+    box-shadow: 30px 0 0 #97bf0d;
+  }
+  50% {
+    box-shadow: 0 0 0 #97bf0d;
+    margin-top: -20px;
+    -webkit-transform: translate(15px,15px);
+    -moz-transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #97bf0d;
+    margin-top: 0;
+  }
+}
+
+.loaderHeader {
+  width: 100%;
+  margin-top: 20px;
+}
+.loaderHeader h2 {
+  text-align: center;
+  font-weight: 300;
+  color: #444;
+}
+
+.renderSelect {
+  width: 100%;
+  height: 100%;
+  background-color: #2e2e2e;
+}
+
+.renderSelect.active {
+  visibility: visible;
+  opacity: 1;
+}
+.renderSelect.inactive {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.configPage {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+}
+    
+.logoContent {
+    width: 100%;
+    height: 20%;
+    background-color: #2e2e2e;
+    position: absolute;
+    top: 0%;
+    z-index: 1;
+}
+    
+.logoContent img {
+    width: 13%;
+    object-fit: contain;
+    filter: drop-shadow(16px 10px 10px rgba(0, 0, 0, 0.7));
+    margin: 8px 0px 0px 15px;
+}
+
+.color-switcher{
+    width: 100%;
+    overflow: auto;
+    border-radius: 0px 50px 0px 0px;
+    height: 90%;
+    background-color: #EDEDED;
+    padding: 1rem;
+    position: absolute;
+    z-index: 1;
+    top: 58%;
+    transform: translate(0, -50%);
+  }
+  
+  .heading{
+    font-size: 1.9rem;
+    margin: 0.2em 0px 1.4em 0px;
+    color: #303030;
+    text-align: center;
+    font-weight: black;
+    text-shadow: 2px 2px 4px #cfcfcf;
+  }
+  
+  .color-list{
+    display: grid;
+    width: 100%;
+    height: 40%;
+    min-height: 200px;
+    margin: auto;
+    text-align: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding-bottom: 1em;
+  }
+  
+  .color-list > * {
+    flex: auto;
+    margin: 0.1em;
+    text-align: center;
+    font-size: 1.5em;
+    text-decoration: none;
+  }
+
+
+
+
+  .vendorImage {
+    width: 100%;
+    max-width: 250px;
+    height: 80%;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-image: var(--bg-vendor-image);
+    background-size: contain;
+    object-fit: contain;
+  }
+  
+  .container {
+    width: 80%;
+    height: 100vh;
+    margin: auto;
+    background-color: blue;
+  }
+  
+  .content {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: var(--bg-color-1);
+  }
+  .content70 {
+    width: 100%;
+    margin: auto;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: auto;
+    background: linear-gradient(315deg, rgb(54, 54, 54) 3%, var(--bg-color-2) 38%, rgb(119, 119, 119) 68%, var(--bg-color-1) 98%);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+
+  }
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+.wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
+
+
+
+
+  .content30 {
+    width: 90%;
+    height: 90%;
+    left: 5%;
+    top: 5%;
+    margin: auto;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+  }
+
+  .content30Login {
+    width: 35%;
+    height: 90%;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+    border-radius: 10px;
+    box-shadow: 4px 2px 8px #5e5e5e;
+  }
+  .content30Info {
+    width: 50%;
+    margin: 10px;
+  }
+  
+  .heightFull {
+    height: 100%;
+  }
+  
+  .mrgAuto {
+    margin: auto;
+  }
+  
+  .contentLogin {
+    width: 90%;
+    height: 80%;
+    margin-top: 5%;
+  }
+  
+  .contentLoginReturn {
+    width: 100%;
+    height: 10%;
+    margin-bottom: 20px;
+  }
+  
+  .contentLoginReturn Button {
+    color: #2e2e2e;
+    width: 40px;
+    height: 40px;
+    background-color: inherit;
+    border-radius: 10%;
+    margin-top: 7px;
+    margin-left: 5px;
+  }
+  .contentLoginReturn Button:hover {
+    color: #fff;
+    background-color: var(--bg-effect-color);
+  
+  }
+  
+  .contentLoginImg {
+    width: 50%;
+    height: 20%;
+  }
+
+  .InfoLogin {
+    width: 50%;
+    height: 80%;
+    margin-top: 30px;
+    margin-left: 40px;
+  }
+
+  .InfoLogin h2 {
+    color: #fff;
+    text-shadow: 2px 2px 2px black;
+    font-weight: bold;
+    font-size: 3.2em;
+  }
+  
+  .contentLoginHeader {
+    width: 100%;
+    height: 15%;
+    margin-top: 1%;
+    margin-bottom: 15%;
+  }
+  
+  .contentLoginHeader h2 {
+    text-align: left;
+    color: #444;
+    padding-left: 20px;
+    font-size: 2.6em;
+    font-weight: 300;
+    text-shadow: 2px 2px #d1d1d1;
+    padding-top: 2%;
+  }
+  
+  .contentLoginInput {
+    width: 100%;
+    height: 30%;
+    margin-top: 7%;
+  }
+  
+  .contentLoginButton {
+    width: 100%;
+    height: 15%;
+    margin-top: 10%;
+
+  }
+  
+  .contentLoginButton button {
+    width: 95.5%;
+    margin: 5% 2%;
+    background-color: var(--bg-button-color);
+  }
+  .contentLoginButton button:hover {
+    background-color: var(--bg-effect-color);
+  }
+
+  .contentLoginLine {
+    width: 75.5%;
+    height: 10px;
+    margin: 15px auto 10px auto;
+    border-bottom: 1px solid #d8d8d8;
+  }
+
+  @media only screen and (max-width: 950px) {
+      .color-list{
+    width: 90%;
+    height: 80%;
+    text-align: center;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+
+  .logoContent img {
+    width: 30%;
+    margin: 15px 0px auto auto;
+}
+
+.logoContent {
+  height: 20%;
+  position: absolute;
+  top: 2.5%;
+}
+
+.content30 {
+  display: initial;
+  overflow-y: auto;
+  width: 100%;
+  left: 0%;
+  top: 5%;
+}
+
+
+.content30Info {
+  width: 90%;
+  display: flex;
+  margin: 10px 10px 60px 10px;
+  z-index: 0;
+}
+
+.contentLoginImg {
+  width: 30%;
+  height: 40%;
+  margin-right: 40px;
+}
+
+.vendorImage {
+  max-width: 150px;
+  height: 80%;
+  max-height: 100px;
+  margin: auto;
+  position: absolute;
+  top: 5%;
+  background-position: top left;
+  background-image: var(--bg-vendor-image);
+}
+
+.InfoLogin {
+  width: 70%;
+  height: 80%;
+  font-size: 0.7rem;
+}
+
+.content30Login {
+  width: 95%;
+  height: 70%;
+  min-height: 500px;
+  border-radius: 10px;
+  padding-top: 10px;
+}
+
+
+
+.contentLoginReturn button {
+  width: 20%;
+  background-color: rgb(226, 226, 226);
+}
+
+.contentLoginHeader h2{
+  text-shadow: none;
+}
+
+.contentLoginHeader {
+  margin-bottom: 15%;
+}
+
+
+
+.contentLoginButton {
+  width: 100%;
+  height: 15%;
+  margin-top: 8%;
+
+}
+
+.color-switcher{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 80%;
+}
+
+
+
+}
+
+  @media only screen and (max-width: 700px) {
+  .logoContent img {
+    width: 40%;
+    margin: 15px 0px auto auto;
+  }
+
+  }
+
+  @media only screen and (max-width: 500px) {
+  .logoContent img {
+    width: 50%;
+    margin: 15px 0px auto auto;
+  }
+
+  .color-switcher{
+    height: 90%;
+    margin-top: 20px;
+  }
+
+  .InfoLogin {
+    width: 70%;
+    height: 80%;
+    font-size: 0.5rem;
+  }
+
+  }
+
+  @media only screen and (max-width: 400px) {
+  .logoContent img {
+    width: 60%;
+    margin: 15px 0px auto auto;
+  }
+
+    .color-list{
+    width: 100%;
+    height: 80%;
+    text-align: center;
+  }
+
+  }

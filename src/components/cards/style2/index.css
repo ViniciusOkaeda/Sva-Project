@@ -1,0 +1,180 @@
+.StyledContainer2 {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+}
+
+.ContentStyled2 {
+    width: 100%;
+    height: 180px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: auto auto 10px auto;
+    padding-top: 25px;
+    box-shadow: 2px 2px 2px rgb(126, 126, 126);
+}
+
+.ContainerStyled2 {
+    width: 95%;
+    height: 85%;
+    margin: auto;
+    display: flex; 
+}
+
+.ContainerStyledImage2 {
+    width: 40%;
+    height: 100%;
+    margin-left: 10px;
+    border-right: 1px solid rgb(230, 230, 230);
+}
+
+
+
+.StyledImage {
+    width: 100%;
+    max-width: 160px;
+    padding: 10px;
+    height: 100%;
+}
+
+.StyledImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ContainerStyledHeader2 {
+    width: 60%;
+    height: 100%;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 5px;
+}
+
+.ContainerStyledHeader2 h2 {
+    color: #444444;
+    font-weight: bold;
+    font-size: 1.9rem;
+    text-align: center;
+}
+
+.ContainerStyledHeader2 button {
+    width: 100%;
+    height: 40px;
+    background-color: var(--bg-button-color);
+    margin-top: 45px;
+    font-weight: bold;
+}
+
+.modalActiveSva {
+    width: 100%;
+    height: 100vh;
+    top: 0%;
+    left: 0%;
+    margin: auto;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalActiveSva.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: 500ms ease;
+}
+
+.modalActiveSva.inactive {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: 500ms ease;
+}
+
+.modalActiveSvaContainer {
+    width: 35%;
+    height: 180px;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px rgb(126, 126, 126);
+    top: 40%;
+    position: absolute;
+    left: 35%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.modalActiveSvaContent1 {
+    width: 100%;
+    height: 60%;
+    padding-top: 35px;
+    margin: auto;
+}
+
+.modalActiveSvaContent1 h3 {
+    margin: auto;
+    font-weight: 500;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.modalActiveSvaContent1 span {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.modalActiveSvaContent2 {
+    width: 100%;
+    height: 40%;
+    display: flex;
+}
+
+.modalActiveSvaContent2 button {
+    width: 40%;
+    height: 40px;
+    margin: auto;
+}
+
+
+@media only screen and (max-width: 950px) {
+    .ContentStyled2 {
+        width: 100%;
+        box-shadow: 2px 2px 2px rgba(126, 126, 126, 0.3);
+    }
+    .ContainerStyledHeader2 h2 {
+        font-size: 1.5rem;
+    }
+
+    
+}
+
+@media only screen and (max-width: 700px) {
+    .StyledContainer2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .modalActiveSvaContainer {
+        width: 45%;
+        left: 30%;
+    }
+
+
+
+}
+
+@media only screen and (max-width: 500px) {
+    .modalActiveSvaContainer {
+        width: 60%;
+        left: 20%;
+    }
+
+}
+
+@media only screen and (max-width: 400px) {
+    .modalActiveSvaContainer {
+        width: 80%;
+        left: 10%;
+    }
+
+}

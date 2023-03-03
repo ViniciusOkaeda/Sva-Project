@@ -1,0 +1,198 @@
+.menuContent {
+    display: flex;
+}
+
+.menuContent a {
+    text-decoration: none;
+}
+.menuContent a:hover {
+    color: #fafafa !important;
+}
+
+
+.menuConfig {
+    width: 20%;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    z-index: 0;
+    box-shadow: 4px 2px 8px #5e5e5e;
+}
+
+.menuConfigImage {
+    width: 90%;
+    margin: 20px auto 60px auto;
+    height: 90px;
+    object-fit: cover;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: var(--bg-vendor-image);
+}
+
+.menuConfigItems {
+    width: 90%;
+    height: 55px;
+    margin: 9px auto auto auto;
+    cursor: pointer;
+    display: flex;
+}
+
+.menuConfigIconContent {
+    width: 20%;
+    height: 100%;
+    padding-top: 6px;
+    padding-left: 9px;
+}
+
+.menuIcon {
+    color: #333;
+}
+
+.menuConfigTextContent {
+    width: 75%;
+    height: 100%;
+    padding-top: 15px;
+    padding-left: 9px;
+}
+
+.menuConfigTextContent p {
+    text-align: left;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+
+.menuConfigItems:hover {
+    color: #fafafa !important;
+    background-color: var(--bg-effect-color);
+    border-radius: 5px;
+}
+
+.menuConfigItems p:hover {
+    color: #fafafa !important;
+}
+.menuConfigItems .menuConfigIconContent .menuIcon:hover {
+    color: #fafafa !important;
+}
+
+.MenuMobile {
+    display: flex;
+    width: 100%;
+    height: 70px;
+}
+
+.menuConfigMobile {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 2px 2px 8px #4d4d4d;
+    display: none;
+}
+
+.menuConfigItems2 {
+    width: 10%;
+    height: 100%;
+}
+
+.optionsMobile.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: 500ms ease;
+}
+
+.optionsMobile.inactive {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: 500ms ease;
+}
+
+.optionsMobile button {
+    width: 100%;
+    border-radius: 50%;
+    background-color: #2b2b2b;
+}
+
+.optionsMobile ul{
+    list-style-type: none;
+    width: 150px;
+    height: 120px;
+    padding: 10px;
+    margin-left: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.optionsMobile li {
+    display: flex;
+    cursor: pointer;
+    color: #444;
+    margin: 25px auto 10px auto;
+}
+
+.optionsMobile li p {
+    padding-left: 10px;
+    padding-top: 4px;
+}
+
+.menuContentUserOptions {
+    width: 80%;
+    height: 80%;
+    margin: 5px auto auto auto;
+}
+
+.menuContentUserOptions button {
+    width: 60px;
+    height: 100%;
+    border-radius: 100%;
+
+    background-color: #2e2e2e;
+}
+
+.menuIconMobile {
+    color: #2e2e2e;
+    margin: 15px 0px 0px 20px;
+}
+
+
+@media only screen and (max-width: 950px) {
+    .menuConfigMobile {
+        display: flex;
+        justify-content: space-between;
+    }
+    .menuConfig {
+        display: none;
+    }
+
+    .menuContentUserOptions button {
+        width: 50px;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+    .menuConfigMobile {
+        padding: 0px 20px 0px 20px;
+    }
+    
+
+}
+
+@media only screen and (max-width: 500px) {
+    .menuConfigMobile {
+        padding: 0px 30px 0px 10px;
+    }
+
+}
+
+@media only screen and (max-width: 400px) {
+    .menuConfigMobile {
+        padding: 0px 40px 0px 10px;
+    }
+
+}
