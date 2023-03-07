@@ -13,7 +13,6 @@ const StyledCard2 = (svas) => {
     let modalOpenRef = useRef();
     const [ modalOpen, setModalOpen] = useState(false);
     const [ specificSva, setSpecificSva ] = useState({});
-    console.log(parseInt(specificSva.idsva))
 
     const [error, setError] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
@@ -76,15 +75,15 @@ const handleModal = () => {
 
     return(
         <div className="StyledContainer2">
+
             {svas.svas.filter(e => e.status === "INACTIVE").map((sva, idx) => {
-                //console.log("meu svsadasdasa", sva)
                 return(
                     <div key={idx} className="ContentStyled2">
                         <div className="ContainerStyled2">
 
                             <div className="ContainerStyledImage2">
                                 <div className="StyledImage">
-                                    <img src={sva.image} alt="SVA Image"/>
+                                    <img src={sva.image} alt="sva_image"/>
                                 </div>
                             </div>
 

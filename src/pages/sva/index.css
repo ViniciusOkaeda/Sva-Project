@@ -67,6 +67,7 @@
     width: 95%;
     height: 100%;
     background-color: #EDEDED;
+    min-height: 00px;
     margin: auto;
     margin-top: -120px;
     border-radius: 20px;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import StyleItem from '../../styles/style-item';
 import Box from '@mui/material/Box';

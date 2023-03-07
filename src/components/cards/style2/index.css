@@ -89,6 +89,7 @@
 .modalActiveSva.inactive {
     visibility: hidden;
     opacity: 0;
+    display: none;
     transform: translateY(-20px);
     transition: 500ms ease;
 }

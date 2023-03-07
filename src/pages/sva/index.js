@@ -41,13 +41,12 @@ const Sva = () => {
                     token: token
                 }
             }).then((result) => {
-                setSvaList(result.data.response)
-                console.log("ATIVOS", result.data.response.filter(e => e.status === "ACTIVE").map(e => e).length);
-                console.log("INATIVOS", result.data.response.filter(e => e.status === "INACTIVE").map(e => e).length);
+                setSvaList(result.data.response);
             }).catch((error) => {
                 console.log(error);
             })
         })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const setTheme = (primaryColor, secondaryColor, buttonColor, effectColor, vendorImg) => {
@@ -76,7 +75,7 @@ const Sva = () => {
                         <div className="bodyHeader2">
                             <h2>Ative seu Produto Digital!</h2>
                         </div>
-                        <StyledCard2 svas={svaList}/>
+                        <StyledCard2 svas={svaList} />
                     </div>
                 </div>
 

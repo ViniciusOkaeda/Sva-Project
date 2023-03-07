@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import Menu from '../../components/menu';
 import OptionsUser from '../../components/optionsUser';
@@ -14,7 +15,7 @@ const Dashboard = () => {
         status: ''
     }])
 
-    const [ havingSva, setHavingSva ] = useState(null);
+    const [ havingSva, setHavingSva ] = useState(false);
 
     const [ activeS, setActiveS ] = useState(null);
     const [ inactiveS, setInactiveS ] = useState(null);
@@ -47,12 +48,13 @@ const Dashboard = () => {
                     token: token
                 }
             }).then((result) => {
-                console.log("aqui esta", result.data.response.length)
                 if(result.data.response.length === 0) {
                     setHavingSva(false);
+                    
+                    console.log("deu zero", havingSva);
                 }else if (result.data.response.length > 0) {
-                    console.log("tem array");
                     setHavingSva(true);
+                    console.log("deu um");
                     setSvaList(result.data.response)
                     setActiveS(result.data.response.filter(e => e.status === "ACTIVE").map(e => e).length);
                     setInactiveS(result.data.response.filter(e => e.status === "INACTIVE").map(e => e).length);
@@ -62,7 +64,6 @@ const Dashboard = () => {
             })
         })();
 
-        //console.log("o sva", svaList);
     
     },[]);
 
@@ -92,38 +93,47 @@ const Dashboard = () => {
                 </div>
 
                 <div className="bodyContent">
-                    <div className="bodyContainer">
-                        
-                        <div className="bodyCardContent">
-                            <div className="bodyCard">
-                                <div className="cardTopContent "> 
-                                    <h5 className="cardTopContentColor1">Ativos</h5>
+                    <div className={`having ${havingSva === true ? 'activeHaving' : 'inactiveHaving'}`}>
+                        <div className="bodyContainer">
+                            
+                            <div className="bodyCardContent">
+                                <div className="bodyCard">
+                                    <div className="cardTopContent "> 
+                                        <h5 className="cardTopContentColor1">Ativos</h5>
+                                    </div>
+
+                                    <div className="cardBottomContent">
+                                        <h4>Meus Produtos Digitais</h4>
+                                        <h2>Você tem {activeS} Produtos</h2>
+                                    </div>
                                 </div>
 
-                                <div className="cardBottomContent">
-                                    <h4>Meus Produtos Digitais</h4>
-                                    <h2>Você tem {activeS} Produtos</h2>
+                                <div className="bodyCard">
+                                    <div className="cardTopContent "> 
+                                        <h5 className="cardTopContentColor2">Para Ativar</h5>
+                                    </div>
+
+                                    <div className="cardBottomContent">
+                                        <h4>Disponíveis</h4>
+                                        <h2>Existem {inactiveS} Produtos</h2>
+                                    </div>
                                 </div>
+
                             </div>
 
-                            <div className="bodyCard">
-                                <div className="cardTopContent "> 
-                                    <h5 className="cardTopContentColor2">Para Ativar</h5>
-                                </div>
-
-                                <div className="cardBottomContent">
-                                    <h4>Disponíveis</h4>
-                                    <h2>Existem {inactiveS} Produtos</h2>
-                                </div>
+                            <div className="bodyTableContent">
+                            <StyledCard1 svas={svaList}/>
                             </div>
 
+                            
                         </div>
 
-                        <div className="bodyTableContent">
-                        <StyledCard1 svas={svaList}/>
-                        </div>
+                    </div>
 
-                        
+                    <div className={`having ${havingSva === false ? 'activeNotHaving' : 'inactiveNotHaving'}`}>
+                        <div className="bodyCardMessage">
+                            <h2>Você não tem direito à nenhum produto digital. Entre em contato com seu provedor!</h2>
+                        </div>
                     </div>
 
                 </div>
