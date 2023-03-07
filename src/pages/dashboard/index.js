@@ -14,27 +14,21 @@ const Dashboard = () => {
         status: ''
     }])
 
+    const [ havingSva, setHavingSva ] = useState(null);
+
     const [ activeS, setActiveS ] = useState(null);
     const [ inactiveS, setInactiveS ] = useState(null);
-    //var activeSvas = svaList.filter(e => e.status === "ACTIVE").map(e => e.status = 1);
-    //let SvaActivated = activeSvas;
-    console.log("ativohfthdhs", svaList.map(e => e).reduce(e => e))
 
-
-
-
-
-
- const apis = axios.create({
-    baseURL: 'https://ativacao.youcast.tv.br/api/v1/internal/',
-    headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS"
-    }
-  })
+    const apis = axios.create({
+        baseURL: 'https://ativacao.youcast.tv.br/api/v1/internal/',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+        }
+    })
 
     useEffect(() => {
         const currentPrimaryColor = localStorage.getItem('primaryColor');
@@ -53,9 +47,16 @@ const Dashboard = () => {
                     token: token
                 }
             }).then((result) => {
-                setSvaList(result.data.response)
-                setActiveS(result.data.response.filter(e => e.status === "ACTIVE").map(e => e).length);
-                setInactiveS(result.data.response.filter(e => e.status === "INACTIVE").map(e => e).length);
+                console.log("aqui esta", result.data.response.length)
+                if(result.data.response.length === 0) {
+                    setHavingSva(false);
+                }else if (result.data.response.length > 0) {
+                    console.log("tem array");
+                    setHavingSva(true);
+                    setSvaList(result.data.response)
+                    setActiveS(result.data.response.filter(e => e.status === "ACTIVE").map(e => e).length);
+                    setInactiveS(result.data.response.filter(e => e.status === "INACTIVE").map(e => e).length);
+                }
             }).catch((error) => {
                 console.log(error);
             })
@@ -92,7 +93,7 @@ const Dashboard = () => {
 
                 <div className="bodyContent">
                     <div className="bodyContainer">
-
+                        
                         <div className="bodyCardContent">
                             <div className="bodyCard">
                                 <div className="cardTopContent "> 
@@ -100,8 +101,8 @@ const Dashboard = () => {
                                 </div>
 
                                 <div className="cardBottomContent">
-                                    <h4>Meus SVA's</h4>
-                                    <h2>Você tem {activeS} SVA's</h2>
+                                    <h4>Meus Produtos Digitais</h4>
+                                    <h2>Você tem {activeS} Produtos</h2>
                                 </div>
                             </div>
 
@@ -112,7 +113,7 @@ const Dashboard = () => {
 
                                 <div className="cardBottomContent">
                                     <h4>Disponíveis</h4>
-                                    <h2>Existem {inactiveS} SVA's</h2>
+                                    <h2>Existem {inactiveS} Produtos</h2>
                                 </div>
                             </div>
 
@@ -120,7 +121,6 @@ const Dashboard = () => {
 
                         <div className="bodyTableContent">
                         <StyledCard1 svas={svaList}/>
-
                         </div>
 
                         

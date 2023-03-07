@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import StyleItem from '../../styles/style-item';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +15,7 @@ import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import './index.css';
+import Loader from '../../components/loader';
 
 import YoucastImage from '../../assets/logo-youcast.png';
 
@@ -22,6 +23,7 @@ const Login = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const ctoken = urlParams.get("ctoken");
     const bannerId = urlParams.get("advert");
+    const companyName = urlParams.get("company");
 
     const [ userByBanner, setUserByBanner ] = React.useState(true);
     const [ userByWeb, setUserByWeb ] = React.useState(false);
@@ -52,45 +54,22 @@ const Login = () => {
       event.preventDefault();
     };
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        login();
+      }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const paletteOptions =[
-        {
-            primaryColor: '#FFD100',
-            secondaryColor: '#989696',
-            buttonColor: '#FFD100',
-            effectColor: '#989696',
-            vendorImg: 'url(https://sms.yplay.com.br/assets/images/images_youcast_upperform-63f7776bd8003.png)',
-            vendorName: 'Youcast',
-            idCompany: 5
-        }, 
-        {
-            primaryColor: '#385563',
-            secondaryColor: '#3C8184',
-            buttonColor: '#FFF212',
-            effectColor: '#2CBCAF',
-            vendorImg: 'url(https://sms.yplay.com.br/assets/images/images_upperForm_WECLIX-632c7592dd2a1.png)',
-            vendorName: 'Weclix Telecom',
-            idCompany: 4
-        }, 
-        {
-            primaryColor: '#00ff37',
-            secondaryColor: '#62aa55',
-            buttonColor: '#F5C447',
-            effectColor: '#000000',
-            vendorImg: 'url(https://sms.yplay.com.br/assets/images/images_youcast_upperform-63f7776bd8003.png)',
-            vendorName: 'Master Telecom',
-            idCompany: 2
-        }, 
-        {
-            primaryColor: '#cc9c00',
-            secondaryColor: '#ffcc00',
-            buttonColor: '#f2b80a',
-            effectColor: '#2CBCAF',
-            vendorImg: 'url(https://sms.yplay.com.br/assets/images/images_yplay_upperform-63e552478d56f.png)',
-            vendorName: 'Yplay Test',
-            idCompany: 1
-        }, 
-    ]
+    const [paletteOptions, setPaletteOptions ] = useState([{
+        primaryColor: '',
+        secondaryColor: '',
+        buttonColor: '',
+        effectColor: '',
+        vendorImg: '',
+        vendorName: '',
+        idCompany: ''
+    }]);
+
 
     const apis = axios.create({
         baseURL: 'https://ativacao.youcast.tv.br/api/v1/internal/',
@@ -104,45 +83,55 @@ const Login = () => {
       })
 
     useEffect(() => {
-        //console.log("a url base", api);
-        if(ctoken == null || bannerId == null) {
-            setUserByBanner(false);
-            setUserByWeb(true);
-        } else if(ctoken !== null || bannerId !== null) {
-            let token = ctoken;
-            let bannerid = parseInt(bannerId);
-            apis.post('login/auto', {
-                token,
-                bannerid
-            }).then(function (response) {
-                if(response.data.status === 1) {
-                    let paletteProvedor = paletteOptions.filter(e => e.idCompany === response.data.response.idcompany).map(e => e).reduce(e => e);
-                    //console.log("o paletteProvedor", paletteProvedor);
-                    console.log("o paletteProvawfaefaefaedor2", paletteProvedor.effectColor);
-                    if(response.data.response.idcompany === paletteProvedor.idCompany) {
-                        localStorage.setItem('primaryColor', paletteProvedor.primaryColor);
-                        localStorage.setItem('secondaryColor', paletteProvedor.secondaryColor);
-                        localStorage.setItem('buttonColor', paletteProvedor.buttonColor);
-                        localStorage.setItem('effectColor', paletteProvedor.effectColor);
-                        localStorage.setItem('vendorImg', paletteProvedor.vendorImg);
-                        localStorage.setItem("token", response.data.response.token);
-                        localStorage.setItem("profile", response.data.response.profileName);
-                        window.location.href = '/dashboard';
-                        //setTheme(paletteProvedor.primaryColor, paletteProvedor.secondaryColor, paletteProvedor.buttonColor, paletteProvedor.effectColor, paletteProvedor.vendorImg);
-                    }
-                    console.log("a resposta", response.data.response);
-                    //console.log("a resposta", response.data.response.idcompany);
-                    //console.log("o palette com reduce", paletteOptions.map(e => e).reduce(e => e));
-                    //console.log("o palette ", paletteOptions.map(e => e.idCompany));
-                    //console.log("o palette com filter", paletteOptions.filter(e => e.idCompany === response.data.response.idcompany).map(e => e).reduce(e => e));
-                    //if()
-                    //console.log("vamos ver", if(response.data.response.idcompany === paletteOptions.map(e => e.idcompany)) {sim})
+        fetch('paletteOptions.json', {
+            headers: {
+                Accept: "application/json"
+            }
+        }).then(res => 
+            res.json()
+            ).then(resp => {
+                let PaletteOptions = resp.paletteOptions;
+                if(companyName == null ) {
+                    setPaletteOptions(resp.paletteOptions);
+                }else if(companyName !== null) {
+                    setPaletteOptions(resp.paletteOptions.filter(e => e.vendorName === companyName))
                 }
-            }).catch(function (error) {
+
+                if(ctoken == null || bannerId == null) {
+                    setUserByBanner(false);
+                    setUserByWeb(true);
+                } else if(ctoken !== null || bannerId !== null) {
+                    let token = ctoken;
+                    let bannerid = parseInt(bannerId);
+                    apis.post('login/auto', {
+                        token,
+                        bannerid
+                    }).then(function (response) {
+                        if(response.data.status === 1) {
+                            let paletteProvedor = PaletteOptions.filter(e => e.idCompany === response.data.response.idcompany).map(e => e).reduce(e => e);
+                            if(response.data.response.idcompany === paletteProvedor.idCompany) {
+                                localStorage.setItem('primaryColor', paletteProvedor.primaryColor);
+                                localStorage.setItem('secondaryColor', paletteProvedor.secondaryColor);
+                                localStorage.setItem('buttonColor', paletteProvedor.buttonColor);
+                                localStorage.setItem('effectColor', paletteProvedor.effectColor);
+                                localStorage.setItem('vendorImg', paletteProvedor.vendorImg);
+                                localStorage.setItem("token", response.data.response.token);
+                                localStorage.setItem("profile", response.data.response.profileName);
+                                window.location.href = '/dashboard';
+                            }
+                        } else {
+                            window.location.href = '/';
+                        }
+                    }).catch(function (error) {
+                        setError(error);
+                        setErrorState(true);
+                        window.location.href = '/'
+                    })
+                }
+            }).catch((error) => {
                 setError(error);
-                setErrorState(true);
-            })
-        }
+                window.location.href = '/'
+            });
 
         const currentPrimaryColor = localStorage.getItem('primaryColor');
         const currentSecondaryColor = localStorage.getItem('secondaryColor');
@@ -157,7 +146,7 @@ const Login = () => {
             setVendorExists(true);
         }
 
-    }, [apis, bannerId, ctoken, paletteOptions])
+    }, [])
 
     const setTheme = (primaryColor, secondaryColor, buttonColor, effectColor, vendorImg) => {
         document.documentElement.style.setProperty('--bg-color-1', primaryColor);
@@ -187,12 +176,9 @@ const Login = () => {
 
     }
 
-
-
-
     async function login() {
         let login = username;
-        let idcompany = 4
+        let idcompany = parseInt(localStorage.getItem('idCompany'));
         apis.post('login', {idcompany, login, password})
             .then(function (response) {
                 if(response.data.status === 1) {
@@ -219,32 +205,31 @@ const Login = () => {
             setError(error);
             setErrorState(true);
             setLoading(false);
+            window.location.href = '/';
           })
 
     }
 
     return(
 
-        <div className="App">
-
-            <div className={`renderLoading ${userByBanner === true ? "active" : "inactive"}`}>
-                <div className="loader"></div>
-                <div className="loaderHeader"><h2>Aguarde enquanto você é redirecionado...</h2></div>
-            </div>
+        <div>
 
             <div className={`renderSelect ${userByWeb === true ? "active" : "inactive"}`}>
-            {vendorExists === false
-                ?
-                    <div className="configPage">
-                        <div className="logoContent">
-                            <img src={YoucastImage} alt="Logo Youcast"/> 
-                        </div>
+                {vendorExists === false
+                    ?
+                        <div className="configPage">
+                            <div className="logoContent">
+                                {/*<img src={YoucastImage} alt="Logo Youcast"/> */}
+                            </div>
 
-                        <div className="color-switcher">
-                            <h1 className="heading">Selecione seu Provedor</h1>
-                            <div className="color-list">
+                            <div className="color-switcher">
+                                <h1 className="heading">Selecione seu Provedor</h1>
+                                <div className="color-list">
                                 {paletteOptions.map((palette, idx) => 
-                                    <div key={idx} onClick={handleCloseSelectVendor}>
+                                    <div className="color-list-padding" key={idx} onClick={(() => {
+                                        handleCloseSelectVendor();
+                                        localStorage.setItem("idCompany", palette.idCompany);
+                                        })}>
                                         <StyleItem 
                                                 setPalette={setPalette} 
                                                 primaryColor={palette.primaryColor}
@@ -253,15 +238,15 @@ const Login = () => {
                                                 effectColor={palette.effectColor}
                                                 vendorImg={palette.vendorImg}
                                                 vendorName={palette.vendorName}
+                                                idCompany={palette.idCompany}
                                         /> 
                                     </div>
                                 )}
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-                :
-                    <div className="content">
+                    :
+                        <div className="content">
                         <div className="content70 heightFull">
                             <div className="wave"></div>
                             <div className="wave"></div>
@@ -274,7 +259,7 @@ const Login = () => {
                                     <div className="vendorImage"></div>
                                 </div>
 
-                                <div className="InfoLogin"><h2>Você está a um passo de ativar seu SVA!</h2></div>
+                                <div className="InfoLogin"><h2>Você está a um passo de ativar seu Produto Digital!</h2></div>
                             </div>
 
                             <div className="content30Login">                    
@@ -289,45 +274,51 @@ const Login = () => {
                                     </div>
 
                                     <div className="contentLoginInput">
-                                        <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '90%'}}>
-                                            <div>
-                                                <TextField 
-                                                    label="Username" 
-                                                    id="outlined-size-normal" 
-                                                    sx={{ m: 1, width: '41.5ch', }}
-                                                    onChange={e => setUsername(e.target.value)}
-                                                />
-                                                
-                                                <FormControl sx={{ m: 1, width: '41.5ch' }} variant="outlined">
-                                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                                <OutlinedInput
-                                                    id="outlined-adornment-password"
-                                                    type={showPassword ? 'text' : 'password'}
-                                                    onChange={e => setPassword(e.target.value)}
-                                                    endAdornment={
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowPassword}
-                                                        onMouseDown={handleMouseDownPassword}
-                                                        edge="end"
-                                                        >
-                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                    }
-                                                    label="Password"
-                                                />
-                                                </FormControl>
-                                            </div>
-                                        </Box>
-                                    </div>
+                                        <form onSubmit={handleSubmit}>
+                                            <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '90%'}}>
+                                                <div>
+                                                    <TextField 
+                                                        label="Username" 
+                                                        id="outlined-size-normal" 
+                                                        sx={{ m: 1, width: '41.5ch', }}
+                                                        onChange={e => setUsername(e.target.value)}
+                                                    />
+                                                    
+                                                    <FormControl sx={{ m: 1, width: '41.5ch' }} variant="outlined" >
+                                                    <InputLabel htmlFor="outlined-adornment-password" >Password</InputLabel>
+                                                    <OutlinedInput
+                                                        id="outlined-adornment-password"
+                                                        type={showPassword ? 'text' : 'password'}
+                                                        onChange={e => setPassword(e.target.value)}
+                                                        endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                            >
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                        }
+                                                        label="Password"
+                                                    />
+                                                    </FormControl>
+                                                </div>
+                                            </Box>
+
 
                                     <div className="contentLoginButton"> 
-                                        <button type="submit" onClick={login}>Fazer Login</button>
+                                        <button type="submit" >Fazer Login</button>
                                     </div>
 
+
                                     <div className="contentLoginLine"></div>
+                                        </form>
+                                    </div>
+
+
 
                                 </div>
 
@@ -401,16 +392,11 @@ const Login = () => {
                             </Alert>
                         </Collapse>
                         </Box>
-                    </div>
+                        </div>
                 }
             </div>
 
-
-
-
-
-
-
+            <Loader userByBanner={userByBanner} />
 
         </div>
     );

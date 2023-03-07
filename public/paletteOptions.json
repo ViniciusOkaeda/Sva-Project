@@ -1,0 +1,40 @@
+{
+    "paletteOptions": [
+        {
+            "primaryColor": "#3D3C3B",
+            "secondaryColor": "#3c3b3a",
+            "buttonColor": "#ffcc00",
+            "effectColor": "#f3ba29",
+            "vendorImg": "url(https://sms.yplay.com.br/assets/images/images_yplay_upperform-63e552478d56f.png)",
+            "vendorName": "Yplay",
+            "idCompany": 1
+        },
+        {
+            "primaryColor": "#3D3C3B",
+            "secondaryColor": "#3c3b3a",
+            "buttonColor": "#ffcc00",
+            "effectColor": "#f3ba29",
+            "vendorImg": "url(https://sms.yplay.com.br/assets/images/images_yplay_upperform-63e552478d56f.png)",
+            "vendorName": "Brand1",
+            "idCompany": 2
+        },
+        {
+            "primaryColor": "#00105A",
+            "secondaryColor": "#43EF68",
+            "buttonColor": "#354382",
+            "effectColor": "#27a540",
+            "vendorImg": "url(https://ativacao.youcast.tv.br/api/public/resources/partners/alloha.png)",
+            "vendorName": "Alloha",
+            "idCompany": 3
+        }, 
+        {
+            "primaryColor": "#385563",
+            "secondaryColor": "#3C8184",
+            "buttonColor": "#FFF212",
+            "effectColor": "#2CBCAF",
+            "vendorImg": "url(https://sms.yplay.com.br/assets/images/images_upperForm_WECLIX-632c7592dd2a1.png)",
+            "vendorName": "Weclix",
+            "idCompany": 4
+        }
+    ]
+}

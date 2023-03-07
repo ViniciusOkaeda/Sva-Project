@@ -47,7 +47,7 @@ const Menu = () => {
                     <a href="/sva">
                         <div className="menuConfigItems"> 
                             <div className="menuConfigIconContent"><QueuePlayNextIcon className="menuIcon" sx={{ fontSize: '2.1em'}}/></div>
-                            <div className="menuConfigTextContent"><p>SVA's</p></div>
+                            <div className="menuConfigTextContent"><p>Produtos Digitais</p></div>
                         </div>
                     </a>
 

@@ -65,7 +65,7 @@ const Sva = () => {
 
                 <div className="HeaderContent2">
                     <div className="HeaderMenu2"> 
-                        <div className="HeaderMenuTitle2"><h2>SVA's</h2></div>
+                        <div className="HeaderMenuTitle2"><h2>Produtos Digitais</h2></div>
                         <div className="HeaderMenuOptions2"><OptionsUser /></div>
 
                     </div>
@@ -74,7 +74,7 @@ const Sva = () => {
                 <div className="bodyContent2">
                     <div className="bodyContainer2">
                         <div className="bodyHeader2">
-                            <h2>Ative seu SVA!</h2>
+                            <h2>Ative seu Produto Digital!</h2>
                         </div>
                         <StyledCard2 svas={svaList}/>
                     </div>

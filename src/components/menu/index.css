@@ -16,7 +16,8 @@
     background-color: rgb(255, 255, 255);
     position: absolute;
     z-index: 0;
-    box-shadow: 4px 2px 8px #5e5e5e;
+    box-shadow: 4px 2px 8px rgba(94, 94, 94, 0.3);
+
 }
 
 .menuConfigImage {
